@@ -1,0 +1,46 @@
+#include <LiquidCrystal.h>
+
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+void setup() {
+  lcd.begin(16, 2);  // Initialize the LCD with 16 columns and 2 rows
+  lcd.print("Hex Addition:");
+  delay(1000);
+  lcd.clear();
+}
+
+void loop() {
+  String hexValue1 = "0x60";
+  String hexValue2 = "0x46";
+
+  // Convert hexadecimal strings to integers
+  int intValue1 = strtol(hexValue1.c_str(), NULL, 16);
+  int intValue2 = strtol(hexValue2.c_str(), NULL, 16);
+
+  // Add the integers
+  int sum = intValue1 + intValue2;
+
+  // Convert the sum back to a hexadecimal string
+  String hexSum = "0x" + String(sum, HEX);
+
+  // Display the hexadecimal numbers and the sum on the LCD
+  lcd.setCursor(0, 0);  // Set the cursor to the first row
+  lcd.print("No.1:");
+  lcd.print(hexValue1);
+  delay(1000);
+  lcd.clear();
+  
+  lcd.setCursor(0, 0);  // Set the cursor to the second row
+  lcd.print("No.2:");
+  lcd.print(hexValue2);
+  delay(1000);
+  lcd.clear();
+  
+  lcd.setCursor(0, 0);  // Set the cursor back to the first row
+  lcd.print("ADD: ");
+  lcd.print(hexSum);
+  delay(1000);
+  lcd.clear();
+    // Delay for readability
+}
